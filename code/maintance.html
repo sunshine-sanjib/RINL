@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>View Complaint Reports</title>
+    <link rel="stylesheet" href="style.css"> <!-- Use your main CSS -->
+    <style>
+        .report-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-left: 6px solid #1e88e5;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .report-id {
+            font-weight: bold;
+            color: #1e88e5;
+        }
+
+        .status-badge {
+            background: #fff3e0;
+            color: #ef6c00;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        .report-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 50px;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Use the same Header from your other pages -->
+    <header> ... Your RINL Header Here ... </header>
+
+    <main class="container">
+        <h1 class="page-title" style="margin: 30px 0; text-align: center;">View UPS Complaint Reports</h1>
+
+        <div id="reports-list">
+            <!-- JavaScript will inject cards here -->
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="user.html" class="btn btn-green" style="text-decoration: none;">Back to Home</a>
+        </div>
+    </main>
+
+    <script>
+        // Logic to read from localStorage and display
+        function displayReports() {
+            const listArea = document.getElementById('reports-list');
+            const data = JSON.parse(localStorage.getItem('rinl_reports')) || [];
+
+            if (data.length === 0) {
+                listArea.innerHTML = '<div class="empty-state">No complaints have been recorded yet.</div>';
+                return;
+            }
+
+            // Reverse the list to show newest first
+            const html = data.reverse().map(item => `
+                <div class="report-card">
+                    <div class="report-header">
+                        <span class="report-id">ID: ${item.ticketId}</span>
+                        <span class="status-badge">${item.status}</span>
+                    </div>
+                    <div class="report-grid">
+                        <div><span class="label">Date:</span> ${item.date}</div>
+                        <div><span class="label">Asset No:</span> ${item.asset}</div>
+                        <div><span class="label">Location:</span> ${item.location}</div>
+                        <div><span class="label">Category:</span> ${item.category}</div>
+                        <div style="grid-column: span 2;"><span class="label">Description:</span> ${item.description}</div>
+                        <div style="grid-column: span 2; font-size: 11px; color: #aaa; margin-top: 10px;">Logged at: ${item.submittedAt}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            listArea.innerHTML = html;
+        }
+
+        // Run on page load
+        window.onload = displayReports;
+    </script>
+</body>
+
+</html> 

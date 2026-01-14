@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Module</title>
+    <link rel="stylesheet" href="complaintstyle.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container header-content">
+            <div class="logo-left">
+                <!-- Replace src with actual logo paths if available -->
+                <div class="main-logo-img">
+                    <img src="images/logonew.jpg" alt="RINL Logo">
+                </div>
+                <div class="logo-text">
+                    <h1>Rashtriya Ispat Nigam Limited</h1>
+                    <h2>Visakhapatnam Steel Plant</h2>
+                    <p>(A Govt. of India Enterprise)</p>
+                </div>
+            </div>
+            <div class="logo-right">
+                <img src="images/betibaacho.png" alt="Beti Bachao">
+                <img src="images/idy.jpg" alt="Yoga Day">
+            </div>
+        </div>
+        <div class="red-border"></div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h1 class="page-title">Complaint Registration</h1>
+
+        <div class="form-card">
+            <!-- Inside the .form-card div -->
+            <div id="success-alert" class="success-alert" style="display: none;">
+                ✔ Complaint has been registered successfully!
+            </div>
+            
+            <!-- ... rest of your form ... -->
+            <h3 class="welcome-text">Welcome, G sanjib</h3>
+
+            <form action="#">
+                <div class="form-row three-col">
+                    <div class="form-group">
+                        <label for="comp-dt">Compl. Dt:</label>
+                        <input type="date" id="comp-dt" placeholder="dd--mm--yyyy">
+                    </div>
+                    <div class="form-group">
+                        <label for="etl-asset">ETL Asset Number:</label>
+                        <input type="text" id="etl-asset">
+                    </div>
+                    <div class="form-group">
+                        <label for="ratings">Ratings:</label>
+                        <input type="text" id="ratings">
+                    </div>
+                </div>
+
+                <div class="form-row three-col">
+                    <div class="form-group">
+                        <label for="location">Location:</label>
+                        <input type="text" id="location">
+                    </div>
+                    <div class="form-group">
+                        <label for="dept">Department:</label>
+                        <input type="text" id="dept">
+                    </div>
+                    <div class="form-group">
+                        <label for="zone">Zone:</label>
+                        <input type="text" id="zone">
+                    </div>
+                </div>
+
+                <div class="form-row single-col">
+                    <div class="form-group">
+                        <label for="boq">BOQ Item Detail:</label>
+                        <input type="text" id="boq">
+                    </div>
+                </div>
+
+                <div class="form-row two-col">
+                    <div class="form-group">
+                        <label for="max-phone">Max Phone: <span class="required">*</span></label>
+                        <input type="text" id="max-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">Mobile No.: <span class="required">*</span></label>
+                        <input type="text" id="mobile" required>
+                    </div>
+                </div>
+
+                <div class="form-row single-col">
+                    <div class="form-group">
+                        <label for="category">Complaint Category: <span class="required">*</span></label>
+                        <select id="category" required>
+                            <option value="">Select Complaint Category</option>
+                            <option value="hardware">Hardware</option>
+                            <option value="software">Software</option>
+                            <option value="network">Network</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row single-col">
+                    <div class="form-group">
+                        <label for="description">Complaint Description: <span class="required">*</span></label>
+                        <textarea id="description" rows="4" required></textarea>
+                    </div>
+                </div>
+
+                <p class="compulsory-note"><i>* Fields are to be filled compulsorily.</i></p>
+
+                <div class="button-container">
+                    <button type="submit" class="btn btn-submit">Submit</button>
+                    <button type="reset" class="btn btn-reset">Reset</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logos">
+                <img src="images/india_gov.jpg" alt="India.gov.in" class="white-bg-logo">
+                <img src="images/CMMIDEV3-1.png" alt="CMMI" class="white-bg-logo">
+                <img src="images/climate_action.jpg" alt="Climate Action" class="white-bg-logo">
+            </div>
+            <p class="updated-date">Website Last updated On 2025-06-23 17:39:00</p>
+            <p class="copyright">© 2025 - Summer Internship Project | Developed under mr. K.N.N.S Yadav | All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+document.querySelector('form').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    // 1. Collect Data from form
+    const formData = {
+        compl_dt: document.getElementById('comp-dt').value,
+        etl_asset: document.getElementById('etl-asset').value,
+        ratings: document.getElementById('ratings').value,
+        location: document.getElementById('location').value,
+        dept: document.getElementById('dept').value,
+        zone: document.getElementById('zone').value,
+        boq: document.getElementById('boq').value,
+        max_phone: document.getElementById('max-phone').value,
+        mobile: document.getElementById('mobile').value,
+        category: document.getElementById('category').value,
+        description: document.getElementById('description').value
+    };
+
+    // 2. Send to Node.js Server
+    fetch('http://localhost:3000/save-complaint', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            // 3. SHOW THE GREEN TICK assurance
+            const alertBox = document.getElementById('success-alert');
+            alertBox.style.display = 'block';
+
+            // 4. Reset form and scroll up
+            this.reset();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Hide tick after 10 seconds
+            setTimeout(() => { alertBox.style.display = 'none'; }, 10000);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("Server not running. Please start the Node server.");
+    });
+});
+</script>
+</body>
+</html>

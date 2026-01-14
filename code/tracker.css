@@ -1,0 +1,140 @@
+/* Tracking Progress Bar CSS */
+.track-container {
+    width: 100%;
+    padding: 20px 0 40px 0;
+}
+
+.progressbar {
+    counter-reset: step;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.progressbar li {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    font-size: 13px;
+    color: #7d7d7d;
+    font-weight: 500;
+}
+
+/* Circles */
+.progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 35px;
+    height: 35px;
+    line-height: 33px;
+    border: 2px solid #ddd;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    border-radius: 50%;
+    background-color: white;
+    z-index: 2;
+    position: relative;
+}
+
+/* Connective Lines */
+.progressbar li:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: #ddd;
+    top: 17px;
+    left: -50%;
+    z-index: 1;
+}
+
+.progressbar li:first-child:after {
+    content: none;
+}
+
+/* Active State Colors (Blue like Flipkart/RINL theme) */
+.progressbar li.active {
+    color: #007bff;
+}
+
+.progressbar li.active:before {
+    border-color: #007bff;
+    background-color: #007bff;
+    color: white;
+}
+
+.progressbar li.active + li:after {
+    background-color: #007bff;
+}
+
+/* Detail Display Grid */
+.view-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.status-badge {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    border: 1px solid #ffeeba;
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin-bottom: 25px;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.detail-item label {
+    display: block;
+    font-size: 12px;
+    color: #777;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.detail-item p {
+    font-size: 15px;
+    color: #333;
+    font-weight: 500;
+}
+
+.full-width {
+    grid-column: span 3;
+}
+
+.description-box {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    border-left: 4px solid #007bff;
+    margin-top: 5px;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+    .full-width {
+        grid-column: span 1;
+    }
+    .progressbar li {
+        font-size: 10px;
+    }
+}

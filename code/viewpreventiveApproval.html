@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM Approval Portal - RINL</title>
+    <!-- Linking to your existing style file -->
+    <link rel="stylesheet" href="preventive_style.css">
+    <style>
+        /* Specific Styles for the Approval Dashboard */
+        .table-card { padding: 0; overflow: hidden; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #f4f4f4; text-align: left; padding: 15px; font-size: 13px; color: #555; }
+        td { padding: 15px; border-top: 1px solid #eee; font-size: 14px; }
+        
+        .btn-view { 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            padding: 7px 15px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn-view:hover { background: #0056b3; }
+        
+        /* Approval Panel (Hidden until Review is clicked) */
+        #approval-section { 
+            display: none; 
+            margin-top: 30px; 
+            border-top: 4px solid #28a745; 
+            padding-top: 20px; 
+            animation: fadeIn 0.5s;
+        }
+
+        .review-box { 
+            background: #fff9e6; 
+            padding: 25px; 
+            border-radius: 6px; 
+            margin-top: 20px; 
+            border: 1px solid #ffeeba; 
+        }
+
+        .btn-approve { background: #28a745; color: white; padding: 12px 25px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .btn-reject { background: #dc3545; color: white; padding: 12px 25px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; margin-left: 10px; }
+        
+        .val { font-weight: bold; color: #000; margin-left: 5px; }
+
+        /* Success Message Styling */
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideDown { 
+            from { opacity: 0; transform: translateY(-20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="header-container">
+            <div class="logo-left">
+                <img src="images/logonew.jpg" alt="RINL Logo">
+                <div class="header-text">
+                    <h1>Rashtriya Ispat Nigam Limited</h1>
+                    <h2>Visakhapatnam Steel Plant</h2>
+                    <p>Coordinator / EIC Approval Portal</p>
+                </div>
+            </div>
+            <div class="logo-right">
+                <img src="images/betibaacho.png" alt="Beti Bachao">
+                <img src="images/idy.jpg" alt="Yoga Day">
+            </div>
+        </div>
+        <div class="red-line"></div>
+    </header>
+
+    <main class="container">
+        <h1 class="main-title">Preventive Maintenance Approval Dashboard</h1>
+
+        <!-- Green Tick Success Alert (Hidden by Default) -->
+        <div id="approval-success" class="alert-success" style="display: none;">
+            ✔ Report <span id="success-action"></span> successfully!
+        </div>
+
+        <!-- Step 1: Dashboard Table -->
+        <div class="form-card table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date of PM</th>
+                        <th>UPS Serial No</th>
+                        <th>Location</th>
+                        <th>Service Engineer</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="pending-list">
+                    <tr><td colspan="5" style="text-align:center; padding: 30px;">Connecting to server...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Step 2: Approval Form (Visible only when Review is clicked) -->
+        <div id="approval-section" class="form-card">
+            <h2 class="section-title" style="color:#28a745; border-bottom: 2px solid #eee; padding-bottom: 10px;">
+                Reviewing Report: <span id="rev-sn" class="val"></span>
+            </h2>
+            
+            <div class="grid-row two-col" style="margin: 20px 0;">
+                <p>Location: <span class="val" id="rev-loc"></span></p>
+                <p>Maintenance Date: <span class="val" id="rev-date"></span></p>
+            </div>
+
+            <div class="review-box">
+                <div class="form-group full-width">
+                    <label>Approver Remarks / Observations <span class="required" style="color:red">*</span></label>
+                    <textarea id="app-remarks" rows="4" placeholder="Mention any deviations or verification notes..."></textarea>
+                </div>
+                <div class="form-group" style="max-width: 400px; margin-top: 15px;">
+                    <label>Approver Name (EIC / Coordinator)</label>
+                    <input type="text" id="app-name" placeholder="Enter your full name">
+                </div>
+                
+                <div style="margin-top: 25px; display: flex; gap: 10px;">
+                    <button class="btn-approve" onclick="submitDecision('Approved')">Approve Report</button>
+                    <button class="btn-reject" onclick="submitDecision('Rejected')">Reject Report</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="margin-top: 50px; text-align: center; color: #777; font-size: 12px; padding-bottom: 20px;">
+        <hr style="border:0; border-top: 1px solid #ddd; margin-bottom: 15px;">
+        <p>© 2025 - UPS Contract Management System | Rashtriya Ispat Nigam Limited</p>
+    </footer>
+
+    <script>
+        let currentReportId = null;
+
+        // Automatically start fetching data when the page opens
+        window.onload = loadPending;
+
+        // Function to load the list of reports marked as 'Pending'
+        function loadPending() {
+            fetch('http://localhost:3000/get-pending-pm')
+            .then(res => res.json())
+            .then(data => {
+                let html = "";
+                if (data.length === 0) {
+                    html = "<tr><td colspan='5' style='text-align:center; padding: 40px; color: #888;'>No pending maintenance reports found for approval.</td></tr>";
+                } else {
+                    data.forEach(item => {
+                        html += `
+                            <tr>
+                                <td>${item.pm_date}</td>
+                                <td>${item.etl_ups_sn}</td>
+                                <td>${item.location}</td>
+                                <td>${item.pm_done_by}</td>
+                                <td><button class="btn-view" onclick="reviewReport(${item.id})">Review</button></td>
+                            </tr>
+                        `;
+                    });
+                }
+                document.getElementById('pending-list').innerHTML = html;
+            })
+            .catch(err => {
+                console.error("Error:", err);
+                document.getElementById('pending-list').innerHTML = "<tr><td colspan='5' style='text-align:center; color:red; padding:20px;'>Server connection error. Ensure Node server is running on port 3000.</td></tr>";
+            });
+        }
+
+        // Show the review box for a specific report
+        function reviewReport(id) {
+            currentReportId = id;
+            fetch(`http://localhost:3000/get-pm-details/${id}`)
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('rev-sn').innerText = data.etl_ups_sn;
+                document.getElementById('rev-loc').innerText = data.location;
+                document.getElementById('rev-date').innerText = data.pm_date;
+                
+                // Show the approval section and clear old inputs
+                document.getElementById('approval-section').style.display = 'block';
+                document.getElementById('app-remarks').value = "";
+                
+                // Smooth scroll to the review section
+                window.scrollTo({ 
+                    top: document.getElementById('approval-section').offsetTop - 50, 
+                    behavior: 'smooth' 
+                });
+            });
+        }
+
+        // Final Submission (Approve or Reject)
+        function submitDecision(decision) {
+            const remarks = document.getElementById('app-remarks').value;
+            const name = document.getElementById('app-name').value;
+
+            if(!remarks || !name) {
+                alert("Please provide both remarks and your name before submitting.");
+                return;
+            }
+
+            fetch('http://localhost:3000/update-pm-approval', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    id: currentReportId,
+                    status: decision,
+                    remarks: remarks,
+                    approver_name: name
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                // 1. Set the action text (Approved / Rejected)
+                document.getElementById('success-action').innerText = decision;
+                
+                // 2. Show the Green Success Alert
+                const successBox = document.getElementById('approval-success');
+                successBox.style.display = 'block';
+
+                // 3. Hide the review section and scroll up
+                document.getElementById('approval-section').style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // 4. Refresh the list and auto-hide the success box after 5 seconds
+                loadPending();
+                setTimeout(() => {
+                    successBox.style.display = 'none';
+                }, 5000);
+            });
+        }
+    </script>
+</body>
+</html>

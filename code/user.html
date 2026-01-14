@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPS Contract Management Portal - RINL</title>
+    <link rel="stylesheet" href="userstlye.css">
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container header-content">
+            <div class="logo-area">
+                <img src="images/logonew.jpg" alt="RINL Logo" class="main-logo">
+                <div class="logo-text">
+                    <h1>Rashtriya Ispat Nigam Limited</h1>
+                    <h2>Visakhapatnam Steel Plant</h2>
+                    <p>(A Govt. of India Enterprise)</p>
+                </div>
+            </div>
+            <div class="top-logos">
+                <img src="images/betibaacho.png" alt="Beti Bachao">
+                <img src="images/idy.jpg" alt="Yoga Logo">
+            </div>
+        </div>
+    </header>
+
+    <!-- Welcome Bar -->
+    <div class="welcome-bar">
+        <div class="container">
+            Welcome, G sanjib
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <p class="subtitle">UPS CONTRACT MANAGEMENT PORTAL – RINL</p>
+                <h1>Register Complaints & Submit PM Reports Instantly</h1>
+                <p class="description">
+                    This internal portal enables RINL teams to log UPS-related complaints, submit preventive maintenance
+                    reports, and track ETL contract progress — all from a centralized dashboard.
+                </p>
+            </div>
+            <div class="hero-image">
+                <img src="images/user.jpg" alt="Workers at terminal">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="features-card">
+                <h3>Want more? Discover key features of this portal.</h3>
+                <div class="feature-item">
+                    <h4>COMPLAINT REGISTRATION</h4>
+                    <p>Instantly log issues related to UPS systems across all RINL zones. Complaints are categorized and
+                        stored with asset details for quicker response by contractors and coordinators.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>PREVENTIVE MAINTENANCE SUBMISSION</h4>
+                    <p>Submit monthly PM reports in a structured digital format. This improves traceability of
+                        maintenance activities and ensures timely upkeep of UPS equipment under ETL contracts.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>COMPLAINT STATUS & APPROVAL PANEL</h4>
+                    <p>Coordinators and EICs can track complaint resolution status and review PM submissions. Built-in
+                        workflow simplifies review, feedback, and approval — all in one place.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Sections -->
+    <div class="container main-content">
+
+        <!-- Register Complaints -->
+        <section class="content-block">
+            <div class="content-text">
+                <h2>Register UPS Complaints Effortlessly</h2>
+                <p>The complaint module allows contractors and plant personnel to report issues related to UPS systems
+                    across all zones. Each complaint is tagged with an asset number, timestamp, and location for
+                    effective resolution tracking.</p>
+                <p>Coordinators and EICs can review submitted complaints, monitor resolution progress, and escalate if
+                    required. The system ensures timely action, accountability, and improved communication between
+                    teams.</p>
+                <button class="btn btn-green" onclick="window.location.href='complaint.html'">
+                    Register New Complaint
+                </button>
+            </div>
+            <div class="content-icon">
+                <img src="images/complaint.webp" alt="Complaint Illustration">
+            </div>
+        </section>
+
+        <!-- View Reports -->
+        <section class="content-block">
+            <div class="content-text">
+                <h2>View UPS Complaint Reports</h2>
+                <p>Access, review, and monitor complaint reports submitted by the Engineer In Charge, Engineer Contract Cell, Zone-wise
+                Electrical Section Coordinators, and respective Section Incharges. Ensure systematic tracking, verification, and timely
+                resolution of reported issues, while maintaining proper records and facilitating inter-departmental coordination for
+                effective corrective action</p>
+                <button class="btn btn-yellow" onclick="window.location.href='viewcomplaint.html'">
+                    View Complaint Report</button>
+            </div>
+            <div class="content-icon">
+                <img src="images/report.avif" alt="Report Illustration">
+            </div>
+        </section>
+
+        <!-- ADDED SECTION: Submit Preventive Maintenance -->
+        <section class="content-block">
+            <div class="content-text">
+                <h2>Submit Preventive Maintenance Reports Digitally</h2>
+                <p>The PM module enables contractors to upload monthly Preventive Maintenance checklists for each UPS
+                    asset as per ETL
+                    contract requirements. The digital submission ensures structured reporting and traceable records.
+                </p>
+                <p>EICs and coordinators can review these reports, verify fieldwork, and approve or return them with
+                    remarks —
+                    streamlining the entire compliance workflow across departments and zones.</p>
+                <button class="btn btn-green" onclick="window.location.href='preventive.html'">
+                    Raise Preventive Maintenance </button>
+            </div>
+            <div class="content-icon">
+                <!-- Replace with your actual image path -->
+                <img src="images/perventive.avif" alt="PM Submission Illustration">
+            </div>
+        </section>
+
+
+
+
+        <!-- Preventive Reports -->
+        <section class="content-block">
+            <div class="content-text">
+                <h2>View UPS Preventive Reports</h2>
+                <p>Access, review, and evaluate Preventive Maintenance reports submitted by the Contract Service Engineer. Verify
+                compliance with approved maintenance schedules, technical standards, and safety protocols, ensure proper documentation,
+                and monitor follow-up actions to maintain system reliability and operational efficiency</p>
+                <button class="btn btn-yellow" onclick="window.location.href='viewpreventive.html'">View Preventive Report</button>
+            </div>
+            <div class="content-icon">
+                <img src="images/maintance.jpg" alt="Maintenance Illustration">
+            </div>
+        </section>
+
+        <!-- Preventive Reports Approval -->
+        <section class="content-block">
+            <div class="content-text">
+                <h2>View UPS Preventive Reports Approval</h2>
+                <p>View, review, and validate Preventive Maintenance Reports submitted by the Contract Service Engineer, ensuring adherence
+                to scheduled maintenance plans, technical specifications, and safety standards, with proper documentation and timely
+                follow-up actions.</p>
+                <button class="btn btn-green" onclick="window.location.href='viewpreventiveApproval.html'">View Approval Report</button>
+            </div>
+            <div class="content-icon">
+                <img src="images/approved.png" alt="Maintenance Illustration">
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logos">
+                <img src="images/india_gov.jpg" alt="India Gov">
+                <img src="images/CMMIDEV3-1.png" alt="CMMI Level 3">
+                <img src="images/climate_action.jpg" alt="Climate Action Member">
+            </div>
+            <div class="footer-info">
+                <p>Website Last updated On 2025-06-23 17:39:00</p>
+                <p>&copy; 2025 - Summer Internship Project | Developed under mr. K.N.N.S Yadav | All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

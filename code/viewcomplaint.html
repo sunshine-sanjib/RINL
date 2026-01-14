@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Complaint Status - RINL</title>
+    <link rel="stylesheet" href="complaintstyle.css">
+    <link rel="stylesheet" href="tracker.css">
+    <style>
+        .details-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
+        .detail-item label { display: block; font-size: 11px; color: #777; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; }
+        .detail-item p { font-size: 15px; color: #333; font-weight: 500; margin: 0; }
+        .description-box { background-color: #f8f9fa; padding: 15px; border-radius: 4px; border-left: 4px solid #007bff; margin-top: 5px; grid-column: span 3; min-height: 50px; }
+        .status-badge { background-color: #d4edda; color: #155724; padding: 5px 15px; border-radius: 20px; font-weight: bold; border: 1px solid #c3e6cb; }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container header-content">
+            <div class="logo-left">
+                <div class="main-logo-img"><img src="images/logonew.jpg" alt="RINL Logo"></div>
+                <div class="logo-text">
+                    <h1>Rashtriya Ispat Nigam Limited</h1>
+                    <h2>Visakhapatnam Steel Plant</h2>
+                    <p>(A Govt. of India Enterprise)</p>
+                </div>
+            </div>
+            <div class="logo-right">
+                <img src="images/betibaacho.png" alt="Beti Bachao">
+                <img src="images/idy.jpg" alt="Yoga Day">
+            </div>
+        </div>
+        <div class="red-border"></div>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">Complaint Status Tracking</h1>
+
+        <!-- Progress Tracker -->
+        <div class="form-card">
+            <div class="track-container">
+                <ul class="progressbar">
+                    <li class="active" id="step1">Complaint Registered</li>
+                    <li id="step2">Assigned to Engineer</li>
+                    <li id="step3">Work in Progress</li>
+                    <li id="step4">Resolved</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Complaint Details Card -->
+        <div class="form-card" id="main-content">
+            <div class="view-header" style="display: flex; justify-content: space-between; align-items: center;">
+                <h3>Complaint Details - Ticket #<span id="disp-ticket">Loading...</span></h3>
+                <span class="status-badge" id="disp-status">Registered</span>
+            </div>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+            <div class="details-grid">
+                <div class="detail-item"><label>Compl. Dt:</label><p id="disp-date"></p></div>
+                <div class="detail-item"><label>ETL Asset Number:</label><p id="disp-asset"></p></div>
+                <div class="detail-item"><label>Ratings:</label><p id="disp-ratings"></p></div>
+                
+                <div class="detail-item"><label>Location:</label><p id="disp-location"></p></div>
+                <div class="detail-item"><label>Department:</label><p id="disp-dept"></p></div>
+                <div class="detail-item"><label>Zone:</label><p id="disp-zone"></p></div>
+
+                <div class="detail-item" style="grid-column: span 3;"><label>BOQ Item Detail:</label><p id="disp-boq"></p></div>
+
+                <div class="detail-item"><label>Max Phone:</label><p id="disp-maxphone"></p></div>
+                <div class="detail-item"><label>Mobile No.:</label><p id="disp-mobile"></p></div>
+                <div class="detail-item"><label>Category:</label><p id="disp-category"></p></div>
+
+                <div class="detail-item" style="grid-column: span 3;">
+                    <label>Complaint Description:</label>
+                    <div class="description-box" id="disp-description"></div>
+                </div>
+            </div>
+
+            <div class="button-container" style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 30px;">
+                <button onclick="window.print()" class="btn btn-reset">Print Receipt</button>
+                <button onclick="window.location.href='user.html'" class="btn btn-submit">Back to Dashboard</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p class="copyright">© 2025 - Summer Internship Project | Developed under Mr. K.N.N.S Yadav</p>
+        </div>
+    </footer>
+
+    <script>
+        
+        window.onload = function() {
+            fetch('http://localhost:3000/get-latest-complaint')
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    // Populate UI
+                    document.getElementById('disp-ticket').innerText = data.ticket_id;
+                    document.getElementById('disp-date').innerText = data.compl_dt;
+                    document.getElementById('disp-asset').innerText = data.etl_asset;
+                    document.getElementById('disp-ratings').innerText = data.ratings;
+                    document.getElementById('disp-location').innerText = data.location;
+                    document.getElementById('disp-dept').innerText = data.dept;
+                    document.getElementById('disp-zone').innerText = data.zone;
+                    document.getElementById('disp-boq').innerText = data.boq_detail;
+                    document.getElementById('disp-maxphone').innerText = data.max_phone;
+                    document.getElementById('disp-mobile').innerText = data.mobile_no;
+                    document.getElementById('disp-category').innerText = data.category;
+                    document.getElementById('disp-description').innerText = data.description;
+                    document.getElementById('disp-status').innerText = data.status;
+
+                    // Update Tracker logic based on status from DB
+                    if(data.status === "Assigned") document.getElementById('step2').classList.add('active');
+                    if(data.status === "Work in Progress") {
+                        document.getElementById('step2').classList.add('active');
+                        document.getElementById('step3').classList.add('active');
+                    }
+                    if(data.status === "Resolved") {
+                        document.getElementById('step2').classList.add('active');
+                        document.getElementById('step3').classList.add('active');
+                        document.getElementById('step4').classList.add('active');
+                    }
+                }
+            })
+            .catch(err => {
+                console.error("Error fetching data:", err);
+                document.getElementById('main-content').innerHTML = "<p style='color:red; text-align:center;'>Unable to load complaint details. Is the Node server running?</p>";
+            });
+        };
+    </script>
+</body>
+</html>

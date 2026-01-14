@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View PM Report - RINL</title>
+    <link rel="stylesheet" href="preventive_style.css">
+    <style>
+        .val { font-weight: bold; color: #000; padding: 2px 0; border-bottom: 1px solid #f0f0f0; }
+        .section-title { border-bottom: 2px solid #eee; margin: 30px 0 15px; padding-bottom: 5px; color: #333; }
+        
+        /* Checklist View Grid */
+        .checklist-view { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .check-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #fafafa; font-size: 14px; }
+        .check-label { color: #555; }
+        .check-status { font-weight: bold; color: #007bff; text-transform: uppercase; }
+        .status-yes { color: #28a745; }
+        .status-no { color: #dc3545; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-left">
+                <img src="images/logonew.jpg" alt="RINL Logo">
+                <div class="header-text">
+                    <h1>Rashtriya Ispat Nigam Limited</h1>
+                    <h2>Visakhapatnam Steel Plant</h2>
+                </div>
+            </div>
+        </div>
+        <div class="red-line"></div>
+    </header>
+
+    <main class="container">
+        <h1 class="main-title">Preventive Maintenance Report Details</h1>
+        
+        <div class="form-card">
+            <!-- Basic Info -->
+            <div class="grid-row four-col">
+                <div class="form-group"><label>ETL_UPS_SI_No</label><div class="val" id="v-sn"></div></div>
+                <div class="form-group"><label>Location</label><div class="val" id="v-loc"></div></div>
+                <div class="form-group"><label>PM_Date</label><div class="val" id="v-date"></div></div>
+                <div class="form-group"><label>PM_Done_By</label><div class="val" id="v-by"></div></div>
+            </div>
+
+            <h3 class="section-title">Checklist Status</h3>
+            <div class="checklist-view">
+                <!-- Left Column -->
+                <div id="check-left">
+                    <div class="check-row"><span class="check-label">Functional Checking:</span><span class="check-status" id="v-f1"></span></div>
+                    <div class="check-row"><span class="check-label">Battery Takeover:</span><span class="check-status" id="v-f2"></span></div>
+                    <div class="check-row"><span class="check-label">Function of SCVS:</span><span class="check-status" id="v-f3"></span></div>
+                    <div class="check-row"><span class="check-label">Blowing/Cleaning:</span><span class="check-status" id="v-f4"></span></div>
+                    <div class="check-row"><span class="check-label">Physical Damage:</span><span class="check-status" id="v-f5"></span></div>
+                    <div class="check-row"><span class="check-label">Thyristors:</span><span class="check-status" id="v-f6"></span></div>
+                    <div class="check-row"><span class="check-label">Diodes/Capacitors:</span><span class="check-status" id="v-f7"></span></div>
+                    <div class="check-row"><span class="check-label">Cooling Fans:</span><span class="check-status" id="v-f8"></span></div>
+                    <div class="check-row"><span class="check-label">Switches Checking:</span><span class="check-status" id="v-f9"></span></div>
+                </div>
+                <!-- Right Column -->
+                <div id="check-right">
+                    <div class="check-row"><span class="check-label">Redundancy:</span><span class="check-status" id="v-r1"></span></div>
+                    <div class="check-row"><span class="check-label">Static Bypass:</span><span class="check-status" id="v-r2"></span></div>
+                    <div class="check-row"><span class="check-label">Protection:</span><span class="check-status" id="v-r3"></span></div>
+                    <div class="check-row"><span class="check-label">Tightness:</span><span class="check-status" id="v-r4"></span></div>
+                    <div class="check-row"><span class="check-label">Contactors:</span><span class="check-status" id="v-r5"></span></div>
+                    <div class="check-row"><span class="check-label">All IGBTs:</span><span class="check-status" id="v-r6"></span></div>
+                    <div class="check-row"><span class="check-label">Indication Lamps:</span><span class="check-status" id="v-r7"></span></div>
+                    <div class="check-row"><span class="check-label">Panel Locking:</span><span class="check-status" id="v-r8"></span></div>
+                    <div class="check-row"><span class="check-label">Distribution Boards:</span><span class="check-status" id="v-r9"></span></div>
+                </div>
+            </div>
+
+            <h3 class="section-title">Measured Parameters</h3>
+            <div class="grid-row two-col">
+                <div class="form-group"><label>AC Input Voltage</label><div class="val" id="v-ac-in-v"></div></div>
+                <div class="form-group"><label>AC Input Current</label><div class="val" id="v-ac-in-c"></div></div>
+                <!-- ... add other parameters here ... -->
+            </div>
+            
+            <div class="btn-container" style="margin-top:40px;">
+                <button onclick="window.print()" class="submit-btn" style="background:#6c757d;">Print Report</button>
+                <button onclick="window.location.href='user.html'" class="submit-btn" style="margin-left:10px;">Back</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+    window.onload = function() {
+        fetch('http://localhost:3000/get-latest-pm')
+        .then(res => res.json())
+        .then(data => {
+            if (!data) {
+                console.error("No data received from server");
+                return;
+            }
+
+            // 1. Map Basic Info
+            // Using || "N/A" prevents blank fields if data is missing
+            document.getElementById('v-sn').innerText = data.etl_ups_sn || "N/A";
+            document.getElementById('v-loc').innerText = data.location || "N/A";
+            document.getElementById('v-date').innerText = data.pm_date || "N/A";
+            document.getElementById('v-by').innerText = data.pm_done_by || "N/A";
+
+            // 2. Handle Checklist Data Safely (This fixes the [object Object] error)
+            let checks = data.checklist_results;
+            
+            // If it's a string, we parse it. If it's already an object, we use it as is.
+            if (typeof checks === 'string') {
+                try {
+                    checks = JSON.parse(checks);
+                } catch (e) {
+                    console.error("Failed to parse checklist string:", e);
+                    checks = {};
+                }
+            }
+
+            // Apply checklist values to the UI
+            if (checks && typeof checks === 'object') {
+                Object.keys(checks).forEach(key => {
+                    const el = document.getElementById('v-' + key);
+                    if (el) {
+                        el.innerText = checks[key];
+                        // Apply color coding
+                        if (checks[key] === "Yes") el.style.color = "#28a745";
+                        if (checks[key] === "No") el.style.color = "#dc3545";
+                    }
+                });
+            }
+
+            // 3. Map Parameters (Ensure IDs match your HTML)
+            const paramMap = {
+                'v-ac-in-v': data.ac_input_volts,
+                'v-ac-in-c': data.ac_input_curr,
+                'v-freq': data.input_freq,
+                'v-dc-rect': data.dc_rectifier,
+                'v-dc-smps': data.dc_smps,
+                'v-ac-smps': data.ac_smps,
+                'v-ac-out-v': data.ac_output_volt,
+                'v-ac-out-c': data.ac_output_curr,
+                'v-battery': data.battery_data,
+                'v-spares': data.spares_replaced,
+                'v-remarks': data.remarks
+            };
+
+            Object.keys(paramMap).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.innerText = paramMap[id] || "N/A";
+            });
+        })
+        .catch(err => {
+            console.error("Fetch error:", err);
+            alert("Could not connect to server. Check if Node is running.");
+        });
+    };
+</script>
+</body>
+</html>

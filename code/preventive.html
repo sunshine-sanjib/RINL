@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preventive Maintenance Module</title>
+    <link rel="stylesheet" href="preventive_style.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="header-container">
+            <div class="logo-left">
+                <img src="images/logonew.jpg" alt="RINL Logo">
+                <div class="header-text">
+                    <h1>Rashtriya Ispat Nigam Limited</h1>
+                    <h2>Visakhapatnam Steel Plant</h2>
+                    <p>(A Govt. of India Enterprise)</p>
+                </div>
+            </div>
+            <div class="logo-right">
+                <img src="images/betibaacho.png" alt="Beti Bachao">
+                <img src="images/idy.jpg" alt="Yoga Day">
+            </div>
+        </div>
+        <div class="red-line"></div>
+    </header>
+
+    <main class="container">
+        <h1 class="main-title">Preventive Maintenance</h1>
+        
+        <div id="success-alert" class="alert-success" style="display: none;">
+            ✔ Preventive Maintenance Report has been submitted successfully!
+        </div>
+        
+        <div class="form-card">
+            <form id="pmForm">
+                <!-- Top Info Section -->
+                <div class="grid-row four-col">
+                    <div class="form-group">
+                        <label>ETL_UPS_SI_No</label>
+                        <input type="text" name="etl_ups_sn" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" name="location" required>
+                    </div>
+                    <div class="form-group">
+                        <label>PM_Date</label>
+                        <input type="date" name="pm_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>PM_Done_By</label>
+                        <input type="text" name="pm_done_by" required>
+                    </div>
+                </div>
+
+                <div class="grid-row two-col">
+                    <div class="form-group">
+                        <label>BOQ_Item</label>
+                        <input type="text" name="boq_item">
+                    </div>
+                    <div class="form-group">
+                        <label>Ratings</label>
+                        <input type="text" name="ratings">
+                    </div>
+                </div>
+
+                <!-- Checklist Section -->
+                <h3 class="section-title">Checklist for Maintenance Personnel</h3>
+                <div class="grid-row two-col checklist">
+                    <!-- Left Column Checklist -->
+                    <div class="check-col">
+                        <div class="check-item"><span>Functional Checking:</span> <div class="radios"><label><input type="radio" name="f1" value="Yes"> Yes</label> <label><input type="radio" name="f1" value="No"> No</label></div></div>
+                        <div class="check-item"><span>Battery Takeover:</span> <div class="radios"><label><input type="radio" name="f2" value="Yes"> Yes</label> <label><input type="radio" name="f2" value="No"> No</label></div></div>
+                        <div class="check-item"><span>Function of SCVS:</span> <div class="radios"><label><input type="radio" name="f3" value="Yes"> Yes</label> <label><input type="radio" name="f3" value="No"> No</label> <label><input type="radio" name="f3" value="NA"> NA</label></div></div>
+                        <div class="check-item"><span>Blowing/Vacuum Cleaning:</span> <div class="radios"><label><input type="radio" name="f4" value="Yes"> Yes</label> <label><input type="radio" name="f4" value="No"> No</label></div></div>
+                        <div class="check-item"><span>Physical Damage Check:</span> <div class="radios"><label><input type="radio" name="f5" value="Yes"> Yes</label> <label><input type="radio" name="f5" value="No"> No</label></div></div>
+                        <div class="check-item"><span>All Thyristors:</span> <div class="radios"><label><input type="radio" name="f6" value="Yes"> Yes</label> <label><input type="radio" name="f6" value="No"> No</label></div></div>
+                        <div class="check-item"><span>Diodes and Capacitors:</span> <div class="radios"><label><input type="radio" name="f7" value="Yes"> Yes</label> <label><input type="radio" name="f7" value="No"> No</label></div></div>
+                        <div class="check-item"><span>Cooling Fans:</span> <div class="radios"><label><input type="radio" name="f8" value="Yes"> Yes</label> <label><input type="radio" name="f8" value="No"> No</label></div></div>
+                        <div class="check-item"><span>Switches Checking:</span> <div class="radios"><label><input type="radio" name="f9" value="Yes"> Yes</label> <label><input type="radio" name="f9" value="No"> No</label></div></div>
+                    </div>
+                    <!-- Right Column Checklist -->
+                    <div class="check-col">
+                        <div class="check-item"><span>Redundancy Healthiness:</span> <div class="radios"><label><input type="radio" name="r1" value="Yes"> Yes</label> <label><input type="radio" name="r1" value="No"> No</label> <label><input type="radio" name="r1" value="NA"> NA</label></div></div>
+                        <div class="check-item"><span>Static Bypass Changeover:</span> <div class="radios"><label><input type="radio" name="r2" value="Yes"> Yes</label> <label><input type="radio" name="r2" value="No"> No</label></div></div>
+                        <div class="check-item"><span>Protection Checking:</span> <div class="radios"><label><input type="radio" name="r3" value="Yes"> Yes</label> <label><input type="radio" name="r3" value="No"> No</label></div></div>
+                        <div class="check-item"><span>Tightness of Connections:</span> <div class="radios"><label><input type="radio" name="r4" value="Yes"> Yes</label> <label><input type="radio" name="r4" value="No"> No</label></div></div>
+                        <div class="check-item"><span>Working of Contactors:</span> <div class="radios"><label><input type="radio" name="r5" value="Yes"> Yes</label> <label><input type="radio" name="r5" value="No"> No</label> <label><input type="radio" name="r5" value="NA"> NA</label></div></div>
+                        <div class="check-item"><span>All IGBTs:</span> <div class="radios"><label><input type="radio" name="r6" value="Yes"> Yes</label> <label><input type="radio" name="r6" value="No"> No</label></div></div>
+                        <div class="check-item"><span>Indication Lamps:</span> <div class="radios"><label><input type="radio" name="r7" value="Yes"> Yes</label> <label><input type="radio" name="r7" value="No"> No</label></div></div>
+                        <div class="check-item"><span>Panel Locking:</span> <div class="radios"><label><input type="radio" name="r8" value="Yes"> Yes</label> <label><input type="radio" name="r8" value="No"> No</label></div></div>
+                        <div class="check-item"><span>Panel Distribution Boards:</span> <div class="radios"><label><input type="radio" name="r9" value="Yes"> Yes</label> <label><input type="radio" name="r9" value="No"> No</label> <label><input type="radio" name="r9" value="NA"> NA</label></div></div>
+                    </div>
+                </div>
+
+                <!-- Parameters Section -->
+                <div class="grid-row two-col">
+                    <div class="form-group"><label>AC Input Voltages (RY,YB,BR)</label><input type="text" name="ac_input_volts"></div>
+                    <div class="form-group"><label>AC Input Current (IR,IY,IB)</label><input type="text" name="ac_input_curr"></div>
+                    <div class="form-group"><label>Input Frequency in Hz</label><input type="text" name="input_freq"></div>
+                    <div class="form-group"><label>DC Rectifier Output & Current</label><input type="text" name="dc_rectifier"></div>
+                    <div class="form-group"><label>DC SMPS Voltages</label><input type="text" name="dc_smps"></div>
+                    <div class="form-group"><label>AC SMPS Voltages</label><input type="text" name="ac_smps"></div>
+                    <div class="form-group"><label>AC Output Voltage</label><input type="text" name="ac_output_volt"></div>
+                    <div class="form-group"><label>AC Output Current</label><input type="text" name="ac_output_curr"></div>
+                </div>
+
+                <!-- Large Text Area Sections -->
+                <div class="form-group full-width">
+                    <label>Battery Data (AH, RATING, CELLS, MAKE & TYPE)</label>
+                    <textarea rows="3" name="battery_data"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Spares Replaced (if any):</label>
+                    <div class="radios-inline">
+                        <label><input type="radio" name="spares_replaced" value="Yes"> Yes</label>
+                        <label><input type="radio" name="spares_replaced" value="No"> No</label>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Remarks <span class="required">*</span></label>
+                    <textarea rows="4" name="remarks" required></textarea>
+                    <p class="limit-text">maximum length = 250 characters</p>
+                </div>
+
+                <div class="btn-container">
+                    <button type="submit" class="submit-btn">Submit</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('pmForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // 1. Capture Checklist Radio Buttons
+            const checklist = {};
+            const radioNames = ['f1','f2','f3','f4','f5','f6','f7','f8','f9','r1','r2','r3','r4','r5','r6','r7','r8','r9'];
+            
+            radioNames.forEach(name => {
+                const checked = document.querySelector(`input[name="${name}"]:checked`);
+                checklist[name] = checked ? checked.value : "N/A";
+            });
+
+            // 2. Gather all other data using FormData (requires 'name' attributes on inputs)
+            const formData = new FormData(this);
+            const dataObj = Object.fromEntries(formData.entries());
+            
+            // Add the checklist JSON to the object
+            dataObj.checklist = checklist;
+
+            fetch('http://localhost:3000/save-pm', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dataObj)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.status === "success") {
+                    document.getElementById('success-alert').style.display = 'block';
+                    this.reset();
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+
+                    // Hide alert after 5 seconds
+                    setTimeout(() => {
+                        document.getElementById('success-alert').style.display = 'none';
+                    }, 5000);
+                }
+            })
+            .catch(err => {
+                console.error("Error:", err);
+                alert("Failed to submit. Is the Node server running?");
+            });
+        });
+    </script>
+</body>
+</html>

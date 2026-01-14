@@ -1,0 +1,173 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #fcfcfc;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styling */
+header {
+    background-color: white;
+    padding: 10px 40px;
+    border-bottom: 2px solid #e53935;
+    /* Red border from image */
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.logo-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo-left img {
+    height: 60px;
+    margin-right: 15px;
+}
+
+.header-text h1 {
+    font-size: 18px;
+    color: #1b5e20;
+    /* Dark green */
+}
+
+.header-text h2 {
+    font-size: 16px;
+    color: #2e7d32;
+    font-weight: normal;
+}
+
+.header-text p {
+    font-size: 12px;
+    color: #666;
+}
+
+.logo-right img {
+    height: 50px;
+    margin-left: 15px;
+}
+
+/* Main Content Center */
+main {
+    
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 40px 15px rgba(163, 28, 28, 0.05);
+    width: 450px;
+    text-align: center;
+    border: 1px solid #9497a4;
+}
+
+.login-title {
+    color: #007bff;
+    /* Blue title */
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.login-subtitle {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+/* Form Styling */
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    width: 100px;
+    text-align: left;
+    font-size: 13px;
+    color: #333;
+}
+
+.form-group input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    font-size: 14px;
+}
+
+.form-group input::placeholder {
+    color: #aaa;
+}
+
+/* Captcha Styling */
+.captcha-container {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+}
+
+.captcha-box {
+    background-color: #007bff;
+    color: white;
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Button Styling */
+.login-btn {
+    width: 100%;
+    background-color: #00c853;
+    /* Bright green */
+    color: white;
+    border: none;
+    padding: 10px 166px;
+    font-size: 14px;
+    border-radius: 7px;
+    cursor: pointer;
+    margin-top: 100px;
+    transition: background 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #00a846;
+}
+
+.forgot-password {
+    display: block;
+    margin-top: 15px;
+    font-size: 13px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+/* Footer Styling */
+footer {
+    padding: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+}
