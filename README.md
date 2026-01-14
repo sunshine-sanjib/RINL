@@ -70,13 +70,12 @@ improving system reliability and operational efficiency.
   <tr>
     <td>Register Complaint</td>
     <td>
-      <img src="Screenshot/register_complaint.png" width="800"/>
+      <img src="Screenshot/Register complaints and Submit Preventive Maintenance Reports.png" width="800"/>
     </td>
   </tr>
 
 </table>
 
-<p><i>Store all screenshots inside the <b>Screenshot</b> folder.</i></p>
 
 <hr>
 
