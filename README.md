@@ -64,7 +64,7 @@ improving system reliability and operational efficiency.
   <tr>
     <td>Dashboard</td>
     <td>
-      <img src="Screenshot/dashboard.png" width="800"/>
+      <img src="Screenshot/dashbroad.png" width="800"/>
     </td>
   </tr>
   <tr>
