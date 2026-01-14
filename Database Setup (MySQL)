@@ -1,0 +1,43 @@
+CREATE DATABASE ups_system;
+USE ups_system;
+
+CREATE TABLE complaints (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ticket_id VARCHAR(20),
+    compl_dt DATE,
+    etl_asset VARCHAR(50),
+    ratings VARCHAR(50),
+    location VARCHAR(100),
+    dept VARCHAR(100),
+    zone VARCHAR(50),
+    boq_detail TEXT,
+    max_phone VARCHAR(20),
+    mobile_no VARCHAR(20),
+    category VARCHAR(50),
+    description TEXT,
+    status VARCHAR(20) DEFAULT 'Registered',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE pm_reports (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    etl_ups_sn VARCHAR(100),
+    location VARCHAR(100),
+    pm_date DATE,
+    pm_done_by VARCHAR(100),
+    boq_item VARCHAR(100),
+    ratings VARCHAR(100),
+    checklist_results JSON,
+    ac_input_volts VARCHAR(100),
+    ac_input_curr VARCHAR(100),
+    input_freq VARCHAR(50),
+    dc_rectifier VARCHAR(100),
+    dc_smps VARCHAR(100),
+    ac_smps VARCHAR(100),
+    ac_output_volt VARCHAR(100),
+    ac_output_curr VARCHAR(100),
+    battery_data TEXT,
+    spares_replaced VARCHAR(10),
+    remarks TEXT,
+    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
