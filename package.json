@@ -1,0 +1,18 @@
+{
+  "name": "rinl-cms",
+  "version": "1.0.0",
+  "description": "RINL Visakhapatnam Steel Plant - Contract Management System",
+  "scripts": {
+    "server": "cd server && node server.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install-all": "npm install && cd server && npm install && cd ../client && npm install",
+    "build": "cd client && npm run build"
+  },
+  "keywords": ["RINL", "VSP", "contract-management", "MERN"],
+  "author": "RINL IT & ERP Department",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

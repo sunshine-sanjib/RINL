@@ -1,0 +1,169 @@
+.top-header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.announcement-ticker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 24px;
+  font-size: 13px;
+  overflow: hidden;
+}
+.ticker-alert { background: rgba(220,38,38,0.15); border-bottom: 1px solid rgba(220,38,38,0.3); color: #fca5a5; }
+.ticker-warning { background: rgba(245,158,11,0.15); border-bottom: 1px solid rgba(245,158,11,0.3); color: #fcd34d; }
+
+.ticker-label {
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.ticker-text {
+  white-space: nowrap;
+  animation: ticker 20s linear infinite;
+}
+@keyframes ticker { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header-rinl-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+.header-org {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.header-sub {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.header-page-title {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--rinl-gold);
+  border-left: 2px solid var(--rinl-gold);
+  padding-left: 16px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-badges {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.gov-badge {
+  height: 36px;
+  width: auto;
+  border-radius: 4px;
+  object-fit: contain;
+  opacity: 0.85;
+}
+
+.header-time {
+  text-align: right;
+  border-left: 1px solid var(--border);
+  padding-left: 16px;
+}
+
+.time-display {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--rinl-gold);
+  line-height: 1;
+}
+
+.date-display {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.header-user-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 40px;
+  padding: 6px 14px 6px 6px;
+}
+
+.user-chip-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--rinl-blue);
+  border: 2px solid var(--rinl-steel);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.user-chip-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.user-chip-role {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .header-badges { display: none; }
+  .header-rinl-bar { display: none; }
+  .header-time { display: none; }
+  .header-page-title { border: none; padding: 0; font-size: 16px; }
+}

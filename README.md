@@ -1,98 +1,238 @@
-<h1 align="center">UPS Contract Management System</h1>
+# RINL Visakhapatnam Steel Plant — UPS Contract Management System
 
-<hr>
+> A full-stack MERN application for managing UPS contracts, complaints, preventive maintenance, and approvals at Rashtriya Ispat Nigam Limited (RINL), Visakhapatnam Steel Plant.
 
-<h2>📌 Project Overview</h2>
-<p>
-The <b>UPS Contract Management System</b> is a web-based application designed to centralize and digitize
-The management of UPS contracts, maintenance activities, and complaint handling.
-It replaces manual and fragmented processes with a structured digital solution,
-improving system reliability and operational efficiency.
-</p>
+---
 
-<hr>
+## 🚀 Features
 
-<h2>🛠 Features</h2>
-<ul>
-  <li>Create, Read, Update, and Delete (CRUD) operations for UPS contracts</li>
-  <li>Preventive Maintenance (PM) scheduling and tracking</li>
-  <li>Breakdown complaint registration and status monitoring</li>
-  <li>Verification and approval workflows</li>
-  <li>Centralized and secure data management</li>
-</ul>
+| Feature | Description |
+|---|---|
+| 🔐 **Multi-Role Auth** | Contractor, Coordinator, EIC, Admin — all can register and login |
+| 📋 **Complaint Management** | Raise, assign, resolve & approve complaints with full timeline |
+| 🔧 **PM Reports** | Submit preventive maintenance with checklist, measurements & battery data |
+| ✅ **Approval Workflows** | Multi-level review for Coordinators and EICs |
+| 📊 **Live Dashboard** | Charts, SLA breach alerts, monthly trends, role-filtered stats |
+| 💬 **VISHWA AI Chatbot** | Claude-powered assistant for portal guidance |
+| 👑 **Admin Panel** | Manage all users, roles, and access |
+| 🎨 **RINL-Themed UI** | Dark, industrial design matching official brand identity |
 
-<hr>
+---
 
-<h2>⚙️ System Benefits</h2>
-<ul>
-  <li>Reduces manual effort and paperwork</li>
-  <li>Improves monitoring and compliance</li>
-  <li>Ensures reliable UPS system operation</li>
-  <li>Enhances transparency and accountability</li>
-</ul>
+## 📁 Project Structure
 
-<hr>
+```
+rinl-cms/
+├── server/                  # Express + MongoDB backend
+│   ├── models/              # Mongoose schemas
+│   ├── routes/              # API route handlers
+│   ├── middleware/          # JWT auth middleware
+│   ├── utils/               # Seed data helper
+│   ├── server.js            # Entry point
+│   └── .env                 # Environment variables (copy from .env.example)
+│
+├── client/                  # React frontend
+│   ├── public/
+│   │   └── images/          # RINL images (logos, plant photos)
+│   ├── src/
+│   │   ├── components/      # Layout, Sidebar, Header, Chatbot
+│   │   ├── context/         # AuthContext + Axios instance
+│   │   ├── pages/           # All page components
+│   │   └── App.js           # Routes
+│   └── package.json
+│
+├── package.json             # Root scripts
+└── README.md
+```
 
-<h2>🧰 Technologies Used</h2>
-<ul>
-  <li><b>Frontend:</b> HTML, CSS, JavaScript</li>
-  <li><b>Backend:</b> Node.js (Express)</li>
-  <li><b>Database:</b> MySQL</li>
-</ul>
+---
 
-<hr>
+## ⚙️ Setup & Installation
 
-<h2>🔧 Backend Setup & Server Execution</h2>
-<ol>
-  <li>Install Node.js and MySQL on the system.</li>
-  <li>Create the required database and tables in MySQL.</li>
-  <li>Configure database credentials in a <code>.env</code> file.</li>
-  <li>Open the project folder in Visual Studio Code.</li>
-  <li>Install backend dependencies.</li>
-  <li>Run the backend server from the terminal.</li>
-  <li>Verify successful connection between the server and database.</li>
-</ol>
+### Prerequisites
+- Node.js v18+
+- MongoDB (local) or MongoDB Atlas (cloud)
+- Git
 
-<hr>
+### 1. Clone & Install
 
-<h2>📷 Screenshots</h2>
-<table border="1" cellpadding="10" cellspacing="0">
-  <tr>
-    <th>Module</th>
-    <th>Preview</th>
-  </tr>
-  <tr>
-    <td>Dashboard</td>
-    <td>
-      <img src="code/Images/127.0.0.1_5500_index.html.png"/>
-    </td>
-  </tr>
-  <tr>
-    <td>Register Complaint</td>
-    <td>
-      <img src="code/Images/127.0.0.1_5500_user.html.png"/>
-    </td>
-  </tr>
+```bash
+git clone https://github.com/YOUR_USERNAME/rinl-cms.git
+cd rinl-cms
+npm run install-all
+```
 
-</table>
+### 2. Configure Environment
 
+```bash
+cp server/.env server/.env.local
+# Edit server/.env with your values:
+```
 
-<hr>
+```env
+MONGO_URI=mongodb://localhost:27017/rinl_cms
+# OR for Atlas:
+MONGO_URI=mongodb+srv://<user>:<pass>@cluster.mongodb.net/rinl_cms
 
-<h2>📄 License</h2>
-<p>
-This project is licensed under the <b>MIT License</b>.
-</p>
-<p>
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-documentation files (the “Software”), to deal in the Software without restriction, including without limitation
-the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
-subject to the following conditions:
-</p>
-<p>
-The above copyright notice and this permission notice shall be included in all copies or substantial portions
-of the Software.
-</p>
-<p>
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.
-</p>
+JWT_SECRET=your_super_secret_key_here_change_this
+PORT=5000
+CLIENT_URL=http://localhost:3000
+ANTHROPIC_API_KEY=your_anthropic_api_key_here   # Optional: enables full AI chatbot
+NODE_ENV=development
+```
+
+### 3. Run Development
+
+```bash
+# Terminal 1 — Backend
+cd server && npm run dev
+
+# Terminal 2 — Frontend  
+cd client && npm start
+```
+
+Or with concurrently (from root):
+```bash
+npm run dev
+```
+
+Open **http://localhost:3000**
+
+---
+
+## 🔑 Default Login Credentials
+
+| Role | Employee ID | Password | Access |
+|---|---|---|---|
+| Admin | `ADMIN001` | `Admin@1234` | Full access + user management |
+| EIC | `EIC001` | `Eic@1234` | Approve complaints & PM reports |
+| Coordinator | `COORD001` | `Coord@1234` | View & manage zone complaints |
+| Contractor | `ETL001` | `Contractor@123` | Raise complaints & PM reports |
+
+> ⚠️ **Any user can register** at `/register` — new accounts get `contractor` role by default. Admin promotes roles via Admin Panel.
+
+---
+
+## 🌐 Deployment on GitHub + Render/Railway
+
+### Push to GitHub
+
+```bash
+git init
+git add .
+git commit -m "Initial RINL CMS"
+git remote add origin https://github.com/YOUR_USERNAME/rinl-cms.git
+git push -u origin main
+```
+
+### Deploy Backend on Render
+
+1. Create new **Web Service** on render.com
+2. Connect your GitHub repo
+3. Set:
+   - **Root Directory:** `server`
+   - **Build Command:** `npm install`
+   - **Start Command:** `node server.js`
+4. Add Environment Variables from your `.env`
+
+### Deploy Frontend on Vercel / Netlify
+
+```bash
+cd client
+npm run build
+# Upload `build/` folder to Netlify
+# OR connect GitHub to Vercel
+```
+
+> Set `REACT_APP_API_URL` in frontend env to your Render backend URL if not using proxy.
+
+### Full-Stack on Render (Single Service)
+
+Change `NODE_ENV=production` in `.env`. The server already serves the React build in production:
+
+```bash
+# Build frontend first
+cd client && npm run build
+
+# Start server (serves both API + React)
+cd ../server && node server.js
+```
+
+---
+
+## 🤖 AI Chatbot (VISHWA)
+
+The built-in VISHWA chatbot works in two modes:
+
+1. **Without API Key** — Smart keyword-based fallback responses about RINL procedures
+2. **With Anthropic API Key** — Full Claude AI with RINL context and system prompt
+
+Add your key to `server/.env`:
+```env
+ANTHROPIC_API_KEY=sk-ant-...
+```
+
+Get a key at: https://console.anthropic.com
+
+---
+
+## 📊 MongoDB Collections
+
+| Collection | Purpose |
+|---|---|
+| `users` | All registered users with roles |
+| `complaints` | Complaint tickets with timeline |
+| `maintenances` | PM reports with measurements |
+| `announcements` | System alerts and notices |
+
+---
+
+## 🔒 API Endpoints
+
+### Auth
+- `POST /api/auth/login` — Login (any registered user)
+- `POST /api/auth/register` — Register new account
+- `GET /api/auth/me` — Get current user
+- `PUT /api/auth/change-password` — Change password
+
+### Complaints
+- `GET /api/complaints` — List (role-filtered)
+- `POST /api/complaints` — Create
+- `GET /api/complaints/:id` — Detail
+- `PUT /api/complaints/:id/resolve` — Mark resolved
+- `PUT /api/complaints/:id/approve` — EIC approve/reject
+- `GET /api/complaints/stats/summary` — Stats
+
+### Maintenance
+- `GET /api/maintenance` — List
+- `POST /api/maintenance` — Submit PM report
+- `GET /api/maintenance/:id` — Detail
+- `PUT /api/maintenance/:id/approve` — Approve/reject
+
+### Dashboard
+- `GET /api/dashboard` — All stats, trends, recent items
+
+### Users (Admin)
+- `GET /api/users` — All users
+- `PUT /api/users/:id` — Update user/role
+- `DELETE /api/users/:id` — Deactivate
+
+---
+
+## 🛡️ Security
+
+- JWT authentication (24h expiry)
+- bcrypt password hashing (salt rounds: 12)
+- Helmet HTTP security headers
+- Rate limiting (200 req/15 min)
+- Role-based route protection
+- Login history tracking
+
+---
+
+## 📝 License
+
+Developed under RINL IT & ERP Department — Internal Use.  
+Summer Internship Project under Mr. K.N.N.S. Yadav.
+
+© 2025 Rashtriya Ispat Nigam Limited — Visakhapatnam Steel Plant.
