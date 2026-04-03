@@ -70,7 +70,7 @@ improving system reliability and operational efficiency.
   <tr>
     <td>Register Complaint</td>
     <td>
-      <img src="Screenshot/Register complaints and Submit Preventive Maintenance Reports.png" width="800"/>
+      <img src="code/Images/127.0.0.1_5500_user.html.png"/>
     </td>
   </tr>
 
