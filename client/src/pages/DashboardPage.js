@@ -14,7 +14,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Le
 const chartDefaults = { color: '#94a3c8', borderColor: '#1e3258' };
 
 export default function DashboardPage() {
-  const { user, isAdmin, isEIC, isCoordinator } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);

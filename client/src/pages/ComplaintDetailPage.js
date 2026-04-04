@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 export default function ComplaintDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user, isEIC, isCoordinator } = useAuth();
+  const { user, isEIC } = useAuth();
   const [complaint, setComplaint] = useState(null);
   const [loading, setLoading] = useState(true);
   const [resolution, setResolution] = useState('');
@@ -46,13 +46,9 @@ export default function ComplaintDetailPage() {
     finally { setSubmitting(false); }
   };
 
-  const statusColor = { open:'#60a5fa', assigned:'#fbbf24', in_progress:'#fb923c', resolved:'#4ade80', closed:'#94a3b8', rejected:'#f87171' };
-  const priorityColor = { critical:'#f87171', high:'#fb923c', medium:'#fbbf24', low:'#4ade80' };
 
   if (loading) return <div className="app-layout"><Sidebar /><div className="main-content"><div className="app-loading"><div className="spinner"/></div></div></div>;
   if (!complaint) return <div className="app-layout"><Sidebar /><div className="main-content"><div className="page-wrapper"><div className="alert alert-danger">Complaint not found.</div></div></div></div>;
-
-  const isOwner = complaint.raisedBy?._id === user?._id;
 
   return (
     <div className="app-layout">
