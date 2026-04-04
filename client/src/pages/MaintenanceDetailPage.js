@@ -15,20 +15,21 @@ export default function MaintenanceDetailPage() {
   const [remarks, setRemarks] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  const fetch = () => {
+  const fetchReport = () => {
     API.get(`/maintenance/${id}`)
       .then(r => setReport(r.data.report))
       .catch(() => toast.error('Failed to load report'))
       .finally(() => setLoading(false));
   };
 
-  useEffect(() => { fetch(); }, [id]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { fetchReport(); }, [id]);
 
   const handleApproval = async (status) => {
     setSubmitting(true);
     try {
       await API.put(`/maintenance/${id}/approve`, { status, remarks });
-      toast.success(`Report ${status}!`); fetch();
+      toast.success(`Report ${status}!`); fetchReport();
     } catch(e) { toast.error(e.response?.data?.message || 'Error'); }
     finally { setSubmitting(false); }
   };

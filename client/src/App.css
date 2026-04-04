@@ -399,3 +399,117 @@ tbody td {
 @media (max-width: 480px) {
   .stats-grid { grid-template-columns: 1fr; }
 }
+
+/* ── SLA BREACH ROW ── */
+.sla-row {
+  background: rgba(220,38,38,0.06) !important;
+  border-left: 3px solid var(--rinl-red);
+}
+.sla-row:hover {
+  background: rgba(220,38,38,0.1) !important;
+}
+
+/* ── SECTION HEADER (used in dashboard) ── */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.section-header h3 {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ── REG SECTION LABEL (used across forms) ── */
+.reg-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rinl-gold);
+  margin-bottom: 14px;
+  border-left: 3px solid var(--rinl-gold);
+  padding-left: 8px;
+}
+
+/* ── TICKET CODE ── */
+.ticket-code {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  background: var(--bg-elevated);
+  padding: 2px 7px;
+  border-radius: 4px;
+  color: #60a5fa;
+  letter-spacing: 0.03em;
+}
+
+/* ── TIMELINE (shared) ── */
+.timeline {
+  position: relative;
+  padding-left: 22px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--border);
+  border-radius: 2px;
+}
+.timeline-item {
+  position: relative;
+  padding-bottom: 20px;
+  display: flex;
+  gap: 12px;
+}
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--rinl-steel);
+  border: 2px solid var(--bg-card);
+  flex-shrink: 0;
+  margin-left: -22px;
+  margin-top: 3px;
+  z-index: 1;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+}
+.timeline-content { flex: 1; }
+.timeline-action {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.timeline-note {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 3px;
+  line-height: 1.5;
+}
+.timeline-time {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.timeline-by {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ── SPINNER SMALL (used in buttons) ── */
+.spinner-sm {
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}

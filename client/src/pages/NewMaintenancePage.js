@@ -6,7 +6,6 @@ import { API } from '../context/AuthContext';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
-const ZONES = ['Zone-A','Zone-B','Zone-C','Zone-D','Zone-E','Zone-F'];
 const CHECKLIST_ITEMS = [
   { key:'visualInspection', label:'Visual Inspection Completed' },
   { key:'cleaningDone', label:'Cleaning Done' },

@@ -1,0 +1,29 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Environment
+# Keep client/.env (CI=false, no secrets)
+server/.env
+.env.local
+.env.production
+
+# Build
+client/build/
+dist/
+
+# Uploads
+server/uploads/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log

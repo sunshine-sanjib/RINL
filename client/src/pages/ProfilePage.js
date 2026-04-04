@@ -1,6 +1,5 @@
 // ProfilePage.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/layout/Sidebar';
 import Header from '../components/layout/Header';
 import { API } from '../context/AuthContext';
@@ -18,10 +17,10 @@ export function ProfilePage() {
     e.preventDefault();
     setSaving(true);
     try {
-      const { data } = await API.put(`/users/${user._id}`, form);
+      await API.put(`/users/${user._id}`, form);
       updateUser({ ...user, ...form });
       toast.success('Profile updated!');
-    } catch(e) { toast.error(e.response?.data?.message || 'Error'); }
+    } catch(err) { toast.error(err.response?.data?.message || 'Error'); }
     finally { setSaving(false); }
   };
 

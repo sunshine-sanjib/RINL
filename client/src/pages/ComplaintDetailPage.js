@@ -16,7 +16,7 @@ export default function ComplaintDetailPage() {
   const [approveRemarks, setApproveRemarks] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  const fetch = () => {
+  const fetchComplaint = () => {
     setLoading(true);
     API.get(`/complaints/${id}`)
       .then(r => setComplaint(r.data.complaint))
@@ -24,14 +24,15 @@ export default function ComplaintDetailPage() {
       .finally(() => setLoading(false));
   };
 
-  useEffect(() => { fetch(); }, [id]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { fetchComplaint(); }, [id]);
 
   const handleResolve = async () => {
     if (!resolution.trim()) { toast.error('Please enter resolution details.'); return; }
     setSubmitting(true);
     try {
       await API.put(`/complaints/${id}/resolve`, { resolution });
-      toast.success('Marked as resolved!'); fetch();
+      toast.success('Marked as resolved!'); fetchComplaint();
     } catch(e) { toast.error(e.response?.data?.message || 'Error'); }
     finally { setSubmitting(false); }
   };
@@ -40,7 +41,7 @@ export default function ComplaintDetailPage() {
     setSubmitting(true);
     try {
       await API.put(`/complaints/${id}/approve`, { status, remarks: approveRemarks });
-      toast.success(`Complaint ${status}!`); fetch();
+      toast.success(`Complaint ${status}!`); fetchComplaint();
     } catch(e) { toast.error(e.response?.data?.message || 'Error'); }
     finally { setSubmitting(false); }
   };

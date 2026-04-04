@@ -1,238 +1,219 @@
 # RINL Visakhapatnam Steel Plant — UPS Contract Management System
-
-> A full-stack MERN application for managing UPS contracts, complaints, preventive maintenance, and approvals at Rashtriya Ispat Nigam Limited (RINL), Visakhapatnam Steel Plant.
+> Full-stack MERN application for UPS contract management, complaint tracking, and preventive maintenance at Rashtriya Ispat Nigam Limited (RINL).
 
 ---
 
 ## 🚀 Features
-
 | Feature | Description |
 |---|---|
-| 🔐 **Multi-Role Auth** | Contractor, Coordinator, EIC, Admin — all can register and login |
-| 📋 **Complaint Management** | Raise, assign, resolve & approve complaints with full timeline |
-| 🔧 **PM Reports** | Submit preventive maintenance with checklist, measurements & battery data |
-| ✅ **Approval Workflows** | Multi-level review for Coordinators and EICs |
-| 📊 **Live Dashboard** | Charts, SLA breach alerts, monthly trends, role-filtered stats |
-| 💬 **VISHWA AI Chatbot** | Claude-powered assistant for portal guidance |
-| 👑 **Admin Panel** | Manage all users, roles, and access |
-| 🎨 **RINL-Themed UI** | Dark, industrial design matching official brand identity |
+| 🔐 **Multi-Role Auth** | Any user can register & login — Contractor, Coordinator, EIC, Admin |
+| 📋 **Complaint Management** | Raise, track, resolve & approve with full audit timeline |
+| 🔧 **PM Reports** | Preventive maintenance with checklists, measurements, battery data |
+| ✅ **Approval Workflows** | Multi-level coordinator/EIC/admin review queue |
+| 📊 **Live Dashboard** | Charts, SLA breach alerts, role-filtered stats |
+| 💬 **VISHWA AI Chatbot** | Claude-powered assistant built into every page |
+| 👑 **Admin Panel** | Manage all users, roles, activate/deactivate accounts |
 
 ---
 
 ## 📁 Project Structure
-
 ```
 rinl-cms/
-├── server/                  # Express + MongoDB backend
-│   ├── models/              # Mongoose schemas
-│   ├── routes/              # API route handlers
-│   ├── middleware/          # JWT auth middleware
-│   ├── utils/               # Seed data helper
-│   ├── server.js            # Entry point
-│   └── .env                 # Environment variables (copy from .env.example)
-│
-├── client/                  # React frontend
-│   ├── public/
-│   │   └── images/          # RINL images (logos, plant photos)
-│   ├── src/
-│   │   ├── components/      # Layout, Sidebar, Header, Chatbot
-│   │   ├── context/         # AuthContext + Axios instance
-│   │   ├── pages/           # All page components
-│   │   └── App.js           # Routes
-│   └── package.json
-│
-├── package.json             # Root scripts
+├── server.js              ← Root entry point (Render uses this)
+├── routes/                ← API routes (root copies for Render)
+├── models/                ← Mongoose schemas (root copies)
+├── middleware/            ← JWT auth (root copies)
+├── utils/                 ← Seed data
+├── server/                ← Original server files (local dev)
+│   ├── server.js
+│   ├── routes/
+│   ├── models/
+│   ├── middleware/
+│   └── utils/
+├── client/                ← React app (Vercel deploys this folder)
+│   ├── .env               ← CI=false, GENERATE_SOURCEMAP=false
+│   ├── vercel.json        ← SPA routing fix for Vercel
+│   ├── public/images/     ← All RINL images
+│   └── src/
+│       ├── App.js         ← Routes
+│       ├── context/       ← AuthContext + Axios
+│       ├── components/    ← Sidebar, Header, Chatbot
+│       └── pages/         ← All 14 pages
+├── package.json           ← Root deps (server + build script)
 └── README.md
 ```
 
 ---
 
-## ⚙️ Setup & Installation
+## ⚙️ Local Development
 
 ### Prerequisites
-- Node.js v18+
-- MongoDB (local) or MongoDB Atlas (cloud)
-- Git
+- Node.js 18+
+- MongoDB running locally (or Atlas URI)
 
-### 1. Clone & Install
-
+### 1. Install all dependencies
 ```bash
-git clone https://github.com/YOUR_USERNAME/rinl-cms.git
-cd rinl-cms
-npm run install-all
+# From project root
+npm install
+cd server && npm install
+cd ../client && npm install
 ```
 
-### 2. Configure Environment
-
+### 2. Configure server environment
 ```bash
-cp server/.env server/.env.local
-# Edit server/.env with your values:
-```
-
-```env
+cp server/.env.example server/.env
+# Edit server/.env:
 MONGO_URI=mongodb://localhost:27017/rinl_cms
-# OR for Atlas:
-MONGO_URI=mongodb+srv://<user>:<pass>@cluster.mongodb.net/rinl_cms
-
-JWT_SECRET=your_super_secret_key_here_change_this
+JWT_SECRET=any_long_random_string_here
 PORT=5000
 CLIENT_URL=http://localhost:3000
-ANTHROPIC_API_KEY=your_anthropic_api_key_here   # Optional: enables full AI chatbot
 NODE_ENV=development
 ```
 
-### 3. Run Development
-
+### 3. Run locally
 ```bash
-# Terminal 1 — Backend
-cd server && npm run dev
+# Terminal 1 — backend
+cd server && node server.js
 
-# Terminal 2 — Frontend  
+# Terminal 2 — frontend  
 cd client && npm start
 ```
-
-Or with concurrently (from root):
-```bash
-npm run dev
-```
-
-Open **http://localhost:3000**
+Open http://localhost:3000
 
 ---
 
-## 🔑 Default Login Credentials
+## 🔑 Login Credentials (auto-seeded)
+| Role | Employee ID | Password |
+|---|---|---|
+| Admin | `ADMIN001` | `Admin@1234` |
+| EIC | `EIC001` | `Eic@1234` |
+| Coordinator | `COORD001` | `Coord@1234` |
+| Contractor | `ETL001` | `Contractor@123` |
 
-| Role | Employee ID | Password | Access |
-|---|---|---|---|
-| Admin | `ADMIN001` | `Admin@1234` | Full access + user management |
-| EIC | `EIC001` | `Eic@1234` | Approve complaints & PM reports |
-| Coordinator | `COORD001` | `Coord@1234` | View & manage zone complaints |
-| Contractor | `ETL001` | `Contractor@123` | Raise complaints & PM reports |
-
-> ⚠️ **Any user can register** at `/register` — new accounts get `contractor` role by default. Admin promotes roles via Admin Panel.
+> Any user can also **self-register** at `/register` (gets `contractor` role by default)
 
 ---
 
-## 🌐 Deployment on GitHub + Render/Railway
+## 🌐 Deployment Guide
 
-### Push to GitHub
-
+### STEP 1 — Push to GitHub
 ```bash
+cd rinl-cms
 git init
 git add .
-git commit -m "Initial RINL CMS"
+git commit -m "Initial commit: RINL CMS"
+git branch -M main
 git remote add origin https://github.com/YOUR_USERNAME/rinl-cms.git
 git push -u origin main
 ```
 
-### Deploy Backend on Render
+---
 
-1. Create new **Web Service** on render.com
-2. Connect your GitHub repo
-3. Set:
-   - **Root Directory:** `server`
-   - **Build Command:** `npm install`
-   - **Start Command:** `node server.js`
-4. Add Environment Variables from your `.env`
+### STEP 2 — Deploy Backend on Render (free)
 
-### Deploy Frontend on Vercel / Netlify
+1. Go to **https://render.com** → Sign in → **New → Web Service**
+2. Connect your GitHub repo `rinl-cms`
+3. Configure:
+   | Setting | Value |
+   |---|---|
+   | **Root Directory** | *(leave blank — uses root)* |
+   | **Build Command** | `npm install` |
+   | **Start Command** | `node server.js` |
+   | **Node Version** | `18` |
 
-```bash
-cd client
-npm run build
-# Upload `build/` folder to Netlify
-# OR connect GitHub to Vercel
-```
-
-> Set `REACT_APP_API_URL` in frontend env to your Render backend URL if not using proxy.
-
-### Full-Stack on Render (Single Service)
-
-Change `NODE_ENV=production` in `.env`. The server already serves the React build in production:
-
-```bash
-# Build frontend first
-cd client && npm run build
-
-# Start server (serves both API + React)
-cd ../server && node server.js
-```
+4. Add **Environment Variables** (click "Add Environment Variable"):
+   ```
+   MONGO_URI        = mongodb+srv://USER:PASS@cluster.mongodb.net/rinl_cms
+   JWT_SECRET       = your_super_secret_random_string_here
+   CLIENT_URL       = https://rinl-cms.vercel.app
+   NODE_ENV         = production
+   PORT             = 10000
+   ANTHROPIC_API_KEY = sk-ant-... (optional, enables full AI chatbot)
+   ```
+5. Click **Create Web Service** — wait for deploy
+6. **Copy your Render URL** → e.g. `https://rinl-cms-backend.onrender.com`
 
 ---
 
-## 🤖 AI Chatbot (VISHWA)
+### STEP 3 — Deploy Frontend on Vercel
 
-The built-in VISHWA chatbot works in two modes:
+1. Go to **https://vercel.com** → New Project → Import `rinl-cms` from GitHub
+2. Configure **BEFORE clicking Deploy**:
+   | Setting | Value |
+   |---|---|
+   | **Framework Preset** | `Create React App` |
+   | **Root Directory** | `client` ← ⚠️ This is critical! |
+   | **Build Command** | `react-scripts build` |
+   | **Output Directory** | `build` |
+   | **Install Command** | `npm install` |
 
-1. **Without API Key** — Smart keyword-based fallback responses about RINL procedures
-2. **With Anthropic API Key** — Full Claude AI with RINL context and system prompt
+3. Add **Environment Variable**:
+   ```
+   REACT_APP_API_URL = https://rinl-cms-backend.onrender.com
+   ```
+   *(paste your Render URL from Step 2)*
 
-Add your key to `server/.env`:
-```env
-ANTHROPIC_API_KEY=sk-ant-...
-```
-
-Get a key at: https://console.anthropic.com
+4. Click **Deploy** ✅
 
 ---
 
-## 📊 MongoDB Collections
+### STEP 4 — Update Render CORS
 
-| Collection | Purpose |
-|---|---|
-| `users` | All registered users with roles |
-| `complaints` | Complaint tickets with timeline |
-| `maintenances` | PM reports with measurements |
-| `announcements` | System alerts and notices |
+After getting your Vercel URL (e.g. `https://rinl-cms.vercel.app`):
+1. Go to Render → Your service → **Environment**
+2. Update `CLIENT_URL` to your Vercel URL
+3. **Redeploy** the Render service
+
+---
+
+## 🤖 VISHWA AI Chatbot
+
+Works in two modes:
+- **Without API key** — Smart keyword-based responses about RINL procedures
+- **With Anthropic key** — Full Claude AI with RINL system context
+
+Add to Render environment:
+```
+ANTHROPIC_API_KEY = sk-ant-api03-...
+```
+Get a key: https://console.anthropic.com
 
 ---
 
 ## 🔒 API Endpoints
 
-### Auth
-- `POST /api/auth/login` — Login (any registered user)
-- `POST /api/auth/register` — Register new account
-- `GET /api/auth/me` — Get current user
-- `PUT /api/auth/change-password` — Change password
-
-### Complaints
-- `GET /api/complaints` — List (role-filtered)
-- `POST /api/complaints` — Create
-- `GET /api/complaints/:id` — Detail
-- `PUT /api/complaints/:id/resolve` — Mark resolved
-- `PUT /api/complaints/:id/approve` — EIC approve/reject
-- `GET /api/complaints/stats/summary` — Stats
-
-### Maintenance
-- `GET /api/maintenance` — List
-- `POST /api/maintenance` — Submit PM report
-- `GET /api/maintenance/:id` — Detail
-- `PUT /api/maintenance/:id/approve` — Approve/reject
-
-### Dashboard
-- `GET /api/dashboard` — All stats, trends, recent items
-
-### Users (Admin)
-- `GET /api/users` — All users
-- `PUT /api/users/:id` — Update user/role
-- `DELETE /api/users/:id` — Deactivate
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| POST | `/api/auth/login` | Public | Login any user |
+| POST | `/api/auth/register` | Public | Register new account |
+| GET | `/api/auth/me` | JWT | Current user |
+| PUT | `/api/auth/change-password` | JWT | Change password |
+| GET | `/api/complaints` | JWT | List (role-filtered) |
+| POST | `/api/complaints` | JWT | Create complaint |
+| GET | `/api/complaints/:id` | JWT | Detail |
+| PUT | `/api/complaints/:id/resolve` | JWT | Mark resolved |
+| PUT | `/api/complaints/:id/approve` | EIC+ | Approve/reject |
+| GET | `/api/maintenance` | JWT | List PM reports |
+| POST | `/api/maintenance` | JWT | Submit PM report |
+| PUT | `/api/maintenance/:id/approve` | Coord+ | Approve/reject |
+| GET | `/api/dashboard` | JWT | Dashboard stats |
+| GET | `/api/users` | Coord+ | All users |
+| PUT | `/api/users/:id` | Admin/Self | Update user |
+| POST | `/api/chatbot` | JWT | AI chat message |
 
 ---
 
 ## 🛡️ Security
-
 - JWT authentication (24h expiry)
-- bcrypt password hashing (salt rounds: 12)
-- Helmet HTTP security headers
-- Rate limiting (200 req/15 min)
-- Role-based route protection
-- Login history tracking
+- bcrypt password hashing (rounds: 12)  
+- Helmet HTTP headers
+- Rate limiting (200 req/15 min per IP)
+- Role-based route guards
+- CORS whitelist with Vercel domain auto-allow
 
 ---
 
-## 📝 License
-
-Developed under RINL IT & ERP Department — Internal Use.  
-Summer Internship Project under Mr. K.N.N.S. Yadav.
-
+## 📝 Credits
+Developed under RINL IT & ERP Department.  
+Summer Internship Project under Mr. K.N.N.S. Yadav.  
 © 2025 Rashtriya Ispat Nigam Limited — Visakhapatnam Steel Plant.

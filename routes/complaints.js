@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Complaint = require('../models/Complaint');
-const { protect, authorize } = require('../middleware/auth');
+const Complaint = require('./models/Complaint');
+const { protect, authorize } = require('./middleware/auth');
 
 // GET /api/complaints - role aware
 router.get('/', protect, async (req, res) => {

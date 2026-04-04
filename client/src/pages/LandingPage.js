@@ -8,15 +8,15 @@ export function LandingPage() {
       {/* Top Utility Bar */}
       <div className="landing-topbar">
         <div className="topbar-links">
-          <a href="#">Home</a>
-          <a href="#">Mobile Apps</a>
-          <a href="#">RINL e-Suvidha</a>
-          <a href="#">Retired Employees</a>
-          <a href="#">Internship (PTMS)</a>
+          <button className="nav-btn">Home</button>
+          <button className="nav-btn">Mobile Apps</button>
+          <button className="nav-btn">RINL e-Suvidha</button>
+          <button className="nav-btn">Retired Employees</button>
+          <button className="nav-btn">Internship (PTMS)</button>
         </div>
         <div className="topbar-right">
-          <a href="#">A+</a><a href="#">A-</a><a href="#">A</a>
-          <a href="#" className="hindi-link">हिंदी</a>
+          <button className="nav-btn">A+</button><button className="nav-btn">A-</button><button className="nav-btn">A</button>
+          <button className="nav-btn hindi-link">हिंदी</button>
         </div>
       </div>
 
@@ -110,7 +110,7 @@ export function LandingPage() {
       <footer className="landing-footer">
         <div className="footer-links">
           {['VMS','SRM','Kids','Webmail','Medical Services (Employees)','Medical Services (NON-VSP)'].map(l => (
-            <a key={l} href="#">{l}</a>
+            <button key={l} className="footer-link-btn">{l}</button>
           ))}
         </div>
         <div className="footer-bottom">

@@ -88,3 +88,30 @@
   .landing-features { padding: 32px 16px; }
   .footer-bottom { flex-direction: column; padding: 16px; }
 }
+
+/* Button replacements for accessibility (href="#" → button) */
+.nav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 0;
+  transition: color 0.15s;
+}
+.nav-btn:hover { color: var(--rinl-gold); }
+.hindi-link { color: var(--rinl-gold) !important; }
+
+.footer-link-btn {
+  background: none;
+  border: none;
+  border-right: 1px solid var(--border);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 12px 20px;
+  transition: all 0.15s;
+}
+.footer-link-btn:hover { color: var(--rinl-gold); background: rgba(245,158,11,0.05); }

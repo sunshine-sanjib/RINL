@@ -4,7 +4,13 @@ import toast from 'react-hot-toast';
 
 const AuthContext = createContext(null);
 
-const API = axios.create({ baseURL: '/api' });
+// Dev: CRA proxy sends /api → localhost:5000
+// Prod: set REACT_APP_API_URL=https://your-render-backend.onrender.com in Vercel env vars
+const BASE_URL = process.env.REACT_APP_API_URL
+  ? `${process.env.REACT_APP_API_URL}/api`
+  : '/api';
+
+const API = axios.create({ baseURL: BASE_URL });
 
 // Attach JWT to every request
 API.interceptors.request.use((config) => {
